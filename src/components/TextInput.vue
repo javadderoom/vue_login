@@ -1,7 +1,7 @@
 <template>
     
         <label :for="'javad'">{{ label }} :</label>
-        <input type="text" :name="'javad'"  :value= "modelValue" :placeholder= "placeholder" @input="$emit('update:modelValue', 
+        <input :type="type" :name="'javad'"  :value= "modelValue" :placeholder= "placeholder" @input="$emit('update:modelValue', 
         ($event.target as HTMLInputElement).value)">
     
       
@@ -12,6 +12,7 @@
         modelValue: String,
         placeholder: String,
         label: String,
+        type: String
     })
     
     

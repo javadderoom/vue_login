@@ -1,25 +1,32 @@
 <script setup lang="ts">
   import TextInput from '@/components/TextInput.vue';
-import { ref } from 'vue';
+  import { ref } from 'vue';
 
-  const firstName = ref(localStorage.getItem('firstname') || '') ;
-  const lastName = ref(localStorage.getItem('lastname') || '');
-  const email = ref(localStorage.getItem('email') || '');
+
+  const userData = ref({firstName: '',
+                        lastName: '',
+                        email: ''})
+  
+ 
+  userData.value.firstName = localStorage.getItem('firstname') || '' ;
+  userData.value.lastName = localStorage.getItem('lastname') || '';
+  userData.value.email = localStorage.getItem('email') || '';
+
 
   function handleSubmit(){
-    console.log(firstName)
-    localStorage.setItem('firstname', firstName.value)
-    localStorage.setItem('lastname', lastName.value)
-    localStorage.setItem('email', email.value)
+    console.log(userData)
+    localStorage.setItem('firstname', userData.value.firstName)
+    localStorage.setItem('lastname', userData.value.lastName )
+    localStorage.setItem('email', userData.value.email )
   }
  
 </script>
 <template>
   <div class="form-container">
     <form class="form" @submit.prevent="handleSubmit()">
-      <TextInput  v-model="firstName" :placeholder="'نام خود را وارد کنید'" :label="'نام'" />
-      <TextInput v-model="lastName" :placeholder="'نام خانوادگی را وارد کنید'" :label="'نام خانوادگی'"/>
-      <TextInput v-model="email" :placeholder="'آدرس ایمیل معتبر وارد کنید'" :label="'ایمیل'"/>
+      <TextInput  v-model="userData.firstName" :placeholder="'نام خود را وارد کنید'" :label="'نام'" :type="'text'"/>
+      <TextInput v-model="userData.lastName" :placeholder="'نام خانوادگی را وارد کنید'" :label="'نام خانوادگی'" :type="'text'"/>
+      <TextInput v-model="userData.email" :placeholder="'آدرس ایمیل معتبر وارد کنید'" :label="'ایمیل'" :type="'email'"/>
       <button>ثبت</button>
     </form>
     
